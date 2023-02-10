@@ -1,29 +1,44 @@
 import React from 'react'
-import { useState } from 'react'
 import Header from '../Header/Header'
 import './Tasks.scss'
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import axios from '../../axios'
 
-export default function Tasks() {
+class Tasks extends React.Component  {
+    constructor (props)   {
+        super (props)
+        this.state =  {
+            task: [
+                {
+                    id: 1,
+                    name_task: 'Jedziemy w pociągu'
+                }, 
+                {
+                    id: 2, 
+                    name_task: 'Wrócić do domu'
+                }
+            ]}}
 
+    componentDidMount () {
+        this.fetchAllTask()
+    }
 
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            name_task: 'Jedziemy w pociągu'
-        }, 
-        {
-            id: 2, 
-            name_task: 'Wrócić do domu'
-        }
-    ])
+  
+    async fetchAllTask() {
+        const res  = axios.get('http://localhost:3001/api/task')
+        const task = res.data
+        // this.setState({task})
+        console.log(task)
+    }
+
+render() {
 
   return (
     <div>
-        <Header tasks={tasks} setTasks={setTasks}/>
+        <Header />
         <div className="tasks">
             {
-                tasks.map((el, index) => {
+                this.state.task.map((el, index) => {
                     return (
                         <div key={index}>
                             <div className="boxTask">
@@ -42,3 +57,5 @@ export default function Tasks() {
     </div>
   )
 }
+}
+export default Tasks

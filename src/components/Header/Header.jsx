@@ -4,7 +4,7 @@ import './Header.scss'
 import { TextField } from '@mui/material'
 import Button from '@mui/material/Button';
 
-export default function Header({tasks, setTasks}) {
+export default function Header(props) {
 
 const [inputTask, setInputTask] = useState("")
 
@@ -21,14 +21,14 @@ const inputTaskFunction = (e) => {
 }
 
 
-const addTaskToList = () => {
-    const newTask = {
-        name_task: inputTask
-    }
+// const addTaskToList = () => {
+//     const newTask = {
+//         name_task: inputTask
+//     }
 
-    const addNewTask = [...tasks, newTask]
-    setTasks(addNewTask)
-}
+//     const addNewTask = [...tasks, newTask]
+//     setTasks(addNewTask)
+// }
 
 
 
@@ -43,7 +43,6 @@ const addTaskToList = () => {
         onChange={inputTaskFunction}
         id="outlined-basic" label="Zadanie" variant="outlined" />
         <Button 
-        onClick={addTaskToList}
         style={style.btn} variant="outlined">Zapisz</Button>
         </div>
     </div>
